@@ -109,10 +109,14 @@ def analyze_player_rating(file_name):
     slope, intercept, r, p, std_err = stats.linregress(offense, defense)
     print(f"Correlation coefficient (r): {r}")
 
-    plt.scatter(offense, defense)
+    plt.scatter(offense, defense, color='blue', label='Data points')
+    
+    regression_line = [slope * x + intercept for x in offense]
+    
+    plt.plot(offense, regression_line, color='red', label='Regression line')
     plt.xlabel('Offense')
     plt.ylabel('Defense')
-    plt.title(f'Offense vs Defense (r={r:.2f})')
+    plt.title(f'Offense vs Defense (r={r})')
     plt.show()
 
 file_name = fetch_player_stats()
